@@ -3,6 +3,8 @@ package be.steformations.fs.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.user.client.Window;
 
 import be.steformations.fs.client.http.beans.DateParams;
 import be.steformations.fs.client.http.beans.DateResult;
@@ -10,6 +12,7 @@ import be.steformations.fs.client.http.rpc.DateFormatRcpDateResultCallback;
 import be.steformations.fs.client.http.rpc.DateFormatRpcService;
 import be.steformations.fs.client.http.rpc.DateFormatRpcServiceAsync;
 import be.steformations.fs.client.http.rpc.DateFormatRpcStringCallback;
+import be.steformations.fs.client.http.standard.LocalesRequestCallback;
 import be.steformations.fs.client.ui.DateFormatterUI;
 
 public class DateFormatController implements ClickHandler{
@@ -20,6 +23,7 @@ public class DateFormatController implements ClickHandler{
 		super();
 		this.ui=ui;
 		this.ui.getFormatEventSource().addClickHandler(this);
+		this.getAvailableLocales();
 	}
 	@Override
 	public void onClick(ClickEvent event) {
@@ -45,6 +49,12 @@ public class DateFormatController implements ClickHandler{
 		this.ui.getOutput().setText(result.getFormattedDate());
 	}
 	
+	public void setAvailableLocales(String[] locales) {
+		GWT.log("DateFormatController.setAvailableLocales()");
+		this.ui.setLocales(locales);
+		
+	}
+	
 	private void formatDateToOBjectRpc(DateParams params){
 		GWT.log("DateFormatController.formatDateToOBjectRpc()");
 		DateFormatRpcServiceAsync service = GWT.create(DateFormatRpcService.class);
@@ -52,6 +62,7 @@ public class DateFormatController implements ClickHandler{
 		service.formatToObject(params, callback);	//post http
 	}
 	
+	@SuppressWarnings("unused")
 	private void formatDateRpc(DateParams params){
 		GWT.log("DateFormatController.formatDateRpc()");
 		DateFormatRpcServiceAsync service = GWT.create(DateFormatRpcService.class);
@@ -59,6 +70,18 @@ public class DateFormatController implements ClickHandler{
 		service.format(params, callback);	// appel http
 	}
 
+	private void getAvailableLocales(){
+		GWT.log("DateFormatController.getAvailableLocales()");
+		String url="http://127.0.0.1:8888/available/locales";
+		RequestBuilder rb = new RequestBuilder(RequestBuilder.GET, url);
+		LocalesRequestCallback callback = new LocalesRequestCallback(this);
+		rb.setCallback(callback);
+		try {
+			rb.send();
+		} catch (Exception e) {
+			Window.alert(e.getMessage());
+		}
+	}
 	
 	
 

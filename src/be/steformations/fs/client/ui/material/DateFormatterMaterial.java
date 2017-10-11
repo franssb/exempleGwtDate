@@ -24,7 +24,7 @@ public class DateFormatterMaterial extends Composite implements DateFormatterUI{
 	@UiField MaterialListBox dayInput;
 	@UiField MaterialListBox monthInput;
 	@UiField MaterialIntegerBox yearInput;
-	@UiField MaterialTextBox localeInput;
+	@UiField MaterialListBox localeInput;
 	@UiField MaterialButton formatEventSource;
 	@UiField MaterialLabel output;
 	
@@ -43,7 +43,7 @@ public class DateFormatterMaterial extends Composite implements DateFormatterUI{
 			this.monthInput.addItem(""+i,months[i]);	//<option value="1">janvier</option>
 		}
 		this.yearInput.setValue(2017);
-		this.localeInput.setText("en");
+//		this.localeInput.setText("en");
 	}
 
 
@@ -62,9 +62,14 @@ public class DateFormatterMaterial extends Composite implements DateFormatterUI{
 	}
 
 
-	public MaterialTextBox getLocaleInput() {
+//	public MaterialTextBox getLocaleInput() {
+//		return localeInput;
+//	}
+	
+	public MaterialListBox getLocaleInput(){
 		return localeInput;
 	}
+
 
 
 	public MaterialButton getFormatEventSource() {
@@ -74,6 +79,18 @@ public class DateFormatterMaterial extends Composite implements DateFormatterUI{
 
 	public MaterialLabel getOutput() {
 		return output;
+	}
+
+
+	@Override
+	public void setLocales(String[] locales) {
+		this.localeInput.clear();
+		for (String s : locales) {
+			this.localeInput.add(s);
+		}
+		if(locales.length>0){
+			this.localeInput.setSelectedIndex(0);
+		}
 	}
 
 }

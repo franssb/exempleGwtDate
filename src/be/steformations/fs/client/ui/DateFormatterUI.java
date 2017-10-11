@@ -12,5 +12,6 @@ public interface DateFormatterUI {
 	HasValue<String> getLocaleInput();
 	HasClickHandlers getFormatEventSource();
 	HasText getOutput();
+	void setLocales(String[] locales);
 	
 }
