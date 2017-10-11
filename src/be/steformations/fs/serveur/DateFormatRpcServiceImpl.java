@@ -8,6 +8,7 @@ import com.ibm.icu.util.Calendar;
 import com.ibm.icu.util.GregorianCalendar;
 
 import be.steformations.fs.client.http.beans.DateParams;
+import be.steformations.fs.client.http.beans.DateResult;
 import be.steformations.fs.client.http.rpc.DateFormatRpcService;
 
 @SuppressWarnings("serial")
@@ -29,6 +30,21 @@ public class DateFormatRpcServiceImpl
 		String formatted = df.format(calendar.getTime());
 		System.out.println(formatted);
 		return formatted;
+	}
+
+	@Override
+	public DateResult formatToObject(DateParams params) {
+		System.out.println("DateFormatRpcServiceImpl.formatToObject()");
+		calendar.set(calendar.DAY_OF_MONTH, params.getDay());
+		calendar.set(calendar.MONTH, params.getMonth() -1);
+		calendar.set(calendar.YEAR, params.getYear());
+		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL,
+				new Locale(params.getLocale()));
+		String formatted = df.format(calendar.getTime());
+		DateResult result =  new DateResult();
+		result.setDate(calendar.getTime());
+		result.setFormattedDate(formatted);
+		return result;		
 	}
 
 }

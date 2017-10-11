@@ -5,6 +5,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 import be.steformations.fs.client.http.beans.DateParams;
+import be.steformations.fs.client.http.beans.DateResult;
+import be.steformations.fs.client.http.rpc.DateFormatRcpDateResultCallback;
 import be.steformations.fs.client.http.rpc.DateFormatRpcService;
 import be.steformations.fs.client.http.rpc.DateFormatRpcServiceAsync;
 import be.steformations.fs.client.http.rpc.DateFormatRpcStringCallback;
@@ -29,13 +31,25 @@ public class DateFormatController implements ClickHandler{
 		params.setLocale(this.ui.getLocaleInput().getValue());
 		GWT.log(params.toString());
 		
-		this.formatDateRpc(params);
-		
+		//this.formatDateRpc(params);
+		this.formatDateToOBjectRpc(params);
 	}
 	
 	public void setFormatedDate(String s){
 		GWT.log("DateFormatController.setFormatedDate() =>" +s);
 		this.ui.getOutput().setText(s);
+	}	
+	
+	public void setDateResult(DateResult result){
+		GWT.log("DateFormatController.setDateResult()");
+		this.ui.getOutput().setText(result.getFormattedDate());
+	}
+	
+	private void formatDateToOBjectRpc(DateParams params){
+		GWT.log("DateFormatController.formatDateToOBjectRpc()");
+		DateFormatRpcServiceAsync service = GWT.create(DateFormatRpcService.class);
+		DateFormatRcpDateResultCallback callback = new DateFormatRcpDateResultCallback(this);
+		service.formatToObject(params, callback);	//post http
 	}
 	
 	private void formatDateRpc(DateParams params){
@@ -44,5 +58,8 @@ public class DateFormatController implements ClickHandler{
 		DateFormatRpcStringCallback callback = new DateFormatRpcStringCallback(this);
 		service.format(params, callback);	// appel http
 	}
+
+	
+	
 
 }
