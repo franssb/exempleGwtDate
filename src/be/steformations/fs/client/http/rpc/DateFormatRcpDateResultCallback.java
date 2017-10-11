@@ -26,7 +26,7 @@ public class DateFormatRcpDateResultCallback implements AsyncCallback<DateResult
 
 	@Override
 	public void onSuccess(DateResult result) {
-		GWT.log("DateFormatRcpDateResultCallback.onSuccess()");
+		GWT.log("DateFormatRcpDateResultCallback.onSuccess() =>" + result.toString());
 		this.controller.setDateResult(result);
 	}
 

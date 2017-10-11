@@ -41,7 +41,7 @@ public class DateFormatController implements ClickHandler{
 	}	
 	
 	public void setDateResult(DateResult result){
-		GWT.log("DateFormatController.setDateResult()");
+		GWT.log("DateFormatController.setDateResult() =>" + result);
 		this.ui.getOutput().setText(result.getFormattedDate());
 	}
 	
