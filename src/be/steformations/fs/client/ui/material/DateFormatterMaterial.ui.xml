@@ -25,7 +25,7 @@
 					<m:MaterialButton text="formater" ui:field="formatEventSource"/>
 				</m:MaterialColumn>			
 				<m:MaterialColumn  grid="s9">
-					<m:MaterialLabel ui:field="output"/>	<!-- <span> -->
+					<m:MaterialLabel fontSize="1.5em" ui:field="output"/>	<!-- <span> -->
 				</m:MaterialColumn>			
 			</m:MaterialRow>			
 			

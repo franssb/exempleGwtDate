@@ -33,10 +33,15 @@ public class DateFormatController implements ClickHandler{
 		
 	}
 	
+	public void setFormatedDate(String s){
+		GWT.log("DateFormatController.setFormatedDate() =>" +s);
+		this.ui.getOutput().setText(s);
+	}
+	
 	private void formatDateRpc(DateParams params){
 		GWT.log("DateFormatController.formatDateRpc()");
 		DateFormatRpcServiceAsync service = GWT.create(DateFormatRpcService.class);
-		DateFormatRpcStringCallback callback = new DateFormatRpcStringCallback();
+		DateFormatRpcStringCallback callback = new DateFormatRpcStringCallback(this);
 		service.format(params, callback);	// appel http
 	}
 
