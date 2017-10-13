@@ -20,6 +20,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-class>be.steformations.fs.serveur.AvailableLocalesServlet</servlet-class>
 	</servlet>
 	
+<!-- 	<servlet>
+		<servlet-name>DateFormatJsonSercice</servlet-name>
+		<servlet-class>be.steformations.fs.serveur.DateFormatJsonService</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DateFormatJsonSercice</servlet-name>
+		<url-pattern>/json/service</url-pattern>
+	</servlet-mapping> -->
+	
 	<servlet-mapping>
 		<servlet-name>DateFormatterService</servlet-name>
 		<url-pattern>/dateformatter/service</url-pattern>			

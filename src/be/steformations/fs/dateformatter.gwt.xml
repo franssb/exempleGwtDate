@@ -3,7 +3,10 @@
 <module rename-to="dateformatter">
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="gwt.material.design.GwtMaterialWithJQuery" />
+	<inherits name="com.github.nmorel.gwtjackson.GwtJackson" />
+	
 	<source path="client" />
+	
 	<entry-point
 		class="be.steformations.fs.client.DateFormatEntryPoint" />
 </module>
