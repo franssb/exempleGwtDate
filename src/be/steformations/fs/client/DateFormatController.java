@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import be.steformations.fs.client.http.beans.DateParams;
 import be.steformations.fs.client.http.beans.DateResult;
@@ -66,7 +67,7 @@ public class DateFormatController implements ClickHandler{
 	private void formatDateRpc(DateParams params){
 		GWT.log("DateFormatController.formatDateRpc()");
 		DateFormatRpcServiceAsync service = GWT.create(DateFormatRpcService.class);
-		DateFormatRpcStringCallback callback = new DateFormatRpcStringCallback(this);
+		AsyncCallback<String> callback = new DateFormatRpcStringCallback(this);
 		service.format(params, callback);	// appel http
 	}
 
@@ -77,7 +78,7 @@ public class DateFormatController implements ClickHandler{
 		LocalesRequestCallback callback = new LocalesRequestCallback(this);
 		rb.setCallback(callback);
 		try {
-			rb.send();
+			rb.send();	//get http
 		} catch (Exception e) {
 			Window.alert(e.getMessage());
 		}

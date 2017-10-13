@@ -24,6 +24,7 @@ public class DateFormatterMaterial extends Composite implements DateFormatterUI{
 	@UiField MaterialListBox dayInput;
 	@UiField MaterialListBox monthInput;
 	@UiField MaterialIntegerBox yearInput;
+//	@UiField MaterialTextBox localeInput;
 	@UiField MaterialListBox localeInput;
 	@UiField MaterialButton formatEventSource;
 	@UiField MaterialLabel output;
